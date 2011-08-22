@@ -1,18 +1,18 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='panya-banner',
+    name='jmbo-banner',
     version='0.0.5',
-    description='Panya banner app.',
+    description='Jmbo banner app.',
     long_description = open('README.rst', 'r').read(),
     author='Praekelt Foundation',
     author_email='dev@praekelt.com',
     license='BSD',
-    url='http://github.com/praekelt/panya-banner',
+    url='http://github.com/praekelt/jmbo-banner',
     packages = find_packages(),
     install_requires = [
         'django-preferences',
-        'panya',
+        'jmbo',
     ],
     include_package_data=True,
     classifiers = [

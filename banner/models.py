@@ -1,6 +1,6 @@
 from django.db import models
 
-from panya.models import ModelBase
+from jmbo.models import ModelBase
 from preferences.models import Preferences
 
 class Banner(ModelBase):
