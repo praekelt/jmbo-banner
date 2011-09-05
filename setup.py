@@ -1,4 +1,10 @@
 from setuptools import setup, find_packages
+from setuptools.command.test import test
+
+def run_tests(self):
+    from setuptest.runtests import runtests
+    return runtests(self)
+test.run_tests = run_tests
 
 setup(
     name='jmbo-banner',
@@ -14,6 +20,10 @@ setup(
         'django-preferences',
         'jmbo',
     ],
+    tests_require=[
+        'django-setuptest',
+    ],
+    test_suite="banner.tests",
     include_package_data=True,
     classifiers = [
         "Programming Language :: Python",
