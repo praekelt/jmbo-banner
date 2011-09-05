@@ -5,9 +5,10 @@ from generate.json_loader import load_json
 
 BANNER_COUNT = 10
 
+
 def generate():
     objects = []
-    
+
     # gen imagebanner objects
     for i in range(1, BANNER_COUNT + 1):
         objects.append({
@@ -19,13 +20,13 @@ def generate():
                 "url": "http://www.google.com",
                 "sites": {
                     "model": "sites.Site",
-                    "fields": { 
+                    "fields": {
                         "name": "example.com"
                     }
                 },
             },
         })
-    
+
     # gen codebanner objects
     for i in range(1, BANNER_COUNT + 1):
         objects.append({
@@ -37,7 +38,7 @@ def generate():
                 "code": "<strong>strong tag</strong>",
                 "sites": {
                     "model": "sites.Site",
-                    "fields": { 
+                    "fields": {
                         "name": "example.com"
                     }
                 },

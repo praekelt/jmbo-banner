@@ -7,6 +7,7 @@ from django.utils.encoding import smart_str
 from preferences import preferences
 register = template.Library()
 
+
 def resolve_pattern_name(resolver, path):
     tried = []
     match = resolver.regex.search(path)
@@ -18,12 +19,14 @@ def resolve_pattern_name(resolver, path):
             except Resolver404, e:
                 sub_tried = e.args[0].get('tried')
                 if sub_tried is not None:
-                    tried.extend([(pattern.regex.pattern + '   ' + t) for t in sub_tried])
+                    tried.extend([(pattern.regex.pattern + '   ' + t) for t \
+                            in sub_tried])
                 else:
                     tried.append(pattern.regex.pattern)
             else:
                 if sub_match:
-                    sub_match_dict = dict([(smart_str(k), v) for k, v in match.groupdict().items()])
+                    sub_match_dict = dict([(smart_str(k), v) for k, v in \
+                            match.groupdict().items()])
                     sub_match_dict.update(resolver.default_kwargs)
                     for k, v in sub_match[2].iteritems():
                         sub_match_dict[smart_str(k)] = v
@@ -33,12 +36,13 @@ def resolve_pattern_name(resolver, path):
                         return resolve_pattern_name(pattern, new_path)
                 tried.append(pattern.regex.pattern)
         raise Resolver404, {'tried': tried, 'path': new_path}
-    raise Resolver404, {'path' : path}
+    raise Resolver404, {'path': path}
+
 
 def resolve_banner(request, position):
     resolved_banner = None
     queryset = preferences.BannerPreferences.banneroption_set
-    
+
     # filter by url_name
     urlconf = getattr(request, "urlconf", settings.ROOT_URLCONF)
     resolver = RegexURLResolver(r'^/', urlconf)
@@ -49,16 +53,16 @@ def resolve_banner(request, position):
     queryset = queryset.filter(position__exact=position)
     if queryset:
         banner = queryset[0].banner
-    
+
     # filter_by_path
     path_filtered_queryset = queryset.filter(url=request.path)
-   
+
     # get banner firstly by path, otherwise by url name
     if path_filtered_queryset:
         for banner in path_filtered_queryset:
             bnr = banner.banner
             if bnr.is_permitted:
-                reolved_banner = bnr
+                resolved_banner = bnr
                 break
     elif queryset:
         for banner in queryset:
@@ -67,9 +71,13 @@ def resolve_banner(request, position):
                 resolved_banner = bnr
                 break
 
-    # if we still don't have a banner fallback to the first default for the position
+    # If we still don't have a banner fallback to the
+    # first default for the position.
     if not resolved_banner:
-        queryset = preferences.BannerPreferences.banneroption_set.filter(position__exact=position, is_default=True)
+        queryset = preferences.BannerPreferences.banneroption_set.filter(
+            position__exact=position,
+            is_default=True
+        )
         for banner in queryset:
             bnr = banner.banner
             if bnr.is_permitted:
@@ -77,15 +85,26 @@ def resolve_banner(request, position):
                 break
 
     return resolved_banner.as_leaf_class() if resolved_banner else None
-    
-@register.inclusion_tag('banner/inclusion_tags/banner_wide_gizmo.html', takes_context=True)
+
+
+@register.inclusion_tag('banner/inclusion_tags/banner_wide_gizmo.html', \
+        takes_context=True)
 def banner_wide_gizmo(context):
     context = RequestContext(context['request'], {
-        'object': resolve_banner(context['request'], position=context['gizmo_slot_name'])})
+        'object': resolve_banner(
+            context['request'],
+            position=context['gizmo_slot_name'])
+        }
+    )
     return context
 
-@register.inclusion_tag('banner/inclusion_tags/banner_block_gizmo.html', takes_context=True)
+
+@register.inclusion_tag('banner/inclusion_tags/banner_block_gizmo.html', \
+        takes_context=True)
 def banner_block_gizmo(context):
     context = RequestContext(context['request'], {
-        'object': resolve_banner(context['request'], position=context['gizmo_slot_name'])})
+        'object': resolve_banner(
+            context['request'],
+            position=context['gizmo_slot_name'])}
+    )
     return context
