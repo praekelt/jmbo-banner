@@ -13,3 +13,5 @@ INSTALLED_APPS = [
 ]
 
 ROOT_URLCONF = 'banner.tests.urls'
+
+SITE_ID = 1
