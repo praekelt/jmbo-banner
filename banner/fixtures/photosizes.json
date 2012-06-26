@@ -1,6 +1,6 @@
 [
     {
-        "pk": None, 
+        "pk": null, 
         "model": "photologue.photosize", 
         "fields": 
         {
