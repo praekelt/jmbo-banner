@@ -2,34 +2,49 @@
     {
         "pk": null, 
         "model": "photologue.photosize", 
-        "fields": 
-        {
-            "name": "banner_block", 
+        "fields": {
+            "name": "imagebanner_list_item_basic", 
             "watermark": null, 
             "increment_count": false, 
             "effect": null, 
-            "crop": true, 
-            "height": 250, 
-            "width": 300, 
-            "upscale": true, 
+            "crop": false, 
+            "height": 0,             
+            "width": 240, 
+            "upscale": false, 
             "pre_cache": false, 
-            "quality": 70
+            "quality": 90
         }
     }, 
     {
-        "pk": 11, 
+        "pk": null, 
         "model": "photologue.photosize", 
         "fields": {
-            "name": "banner_wide", 
+            "name": "imagebanner_list_item_smart", 
             "watermark": null, 
             "increment_count": false, 
             "effect": null, 
-            "crop": true, 
-            "height": 90, 
-            "width": 728, 
+            "crop": false, 
+            "height": 0,             
+            "width": 1280, 
+            "upscale": false, 
+            "pre_cache": false, 
+            "quality": 90
+        }
+    }, 
+    {
+        "pk": null, 
+        "model": "photologue.photosize", 
+        "fields": {
+            "name": "imagebanner_list_item_vertical_web", 
+            "watermark": null, 
+            "increment_count": false, 
+            "effect": null, 
+            "crop": false, 
+            "height": 0, 
+            "width": 1280, 
             "upscale": true, 
             "pre_cache": false, 
-            "quality": 70
+            "quality": 90
         }
     }
 ]

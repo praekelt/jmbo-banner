@@ -11,12 +11,12 @@ setup(
     url='http://github.com/praekelt/jmbo-banner',
     packages = find_packages(),
     install_requires = [
-        'jmbo',
+        'jmbo-foundry>=0.7',
     ],
     tests_require=[
-        'django-setuptest>=0.0.6',
+        'django-setuptest>=0.1.2',
     ],
-    test_suite="setuptest.SetupTestSuite",
+    test_suite="setuptest.setuptest.SetupTestSuite",
     include_package_data=True,
     classifiers = [
         "Programming Language :: Python",
