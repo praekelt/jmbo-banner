@@ -1,6 +1,10 @@
 Changelog
 =========
 
+0.1.2
+-----
+#. Use correct photosize name.
+
 0.1.1
 -----
 #. Use older `jmbo-foundry` API for image URLs.
@@ -12,3 +16,4 @@ Changelog
 0.0.6
 -----
 #. Fix incorrect photosizes.json
+

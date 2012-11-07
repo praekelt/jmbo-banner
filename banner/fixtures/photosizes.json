@@ -35,7 +35,7 @@
         "pk": null, 
         "model": "photologue.photosize", 
         "fields": {
-            "name": "imagebanner_list_item_vertical_web", 
+            "name": "imagebanner_list_item_web", 
             "watermark": null, 
             "increment_count": false, 
             "effect": null, 
