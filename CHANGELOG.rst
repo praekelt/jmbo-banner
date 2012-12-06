@@ -1,6 +1,10 @@
 Changelog
 =========
 
+next
+----
+#. Create list item templates for code banners.
+
 0.1.2
 -----
 #. Use correct photosize name.
