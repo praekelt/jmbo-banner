@@ -14,10 +14,6 @@ class CodeBanner(Banner):
 embedded for this banner.'
     )
 
-    class Meta():
-        verbose_name = 'Code banner'
-        verbose_name_plural = 'Code banners'
-
 
 class ImageBanner(Banner):
     url = models.CharField(
@@ -25,10 +21,6 @@ class ImageBanner(Banner):
         verbose_name='URL',
         help_text='URL (internal or external) to which this banner will link.'
     )
-
-    class Meta():
-        verbose_name = 'Image banner'
-        verbose_name_plural = 'Image banners'
 
     def get_absolute_url(self):
         return self.url
