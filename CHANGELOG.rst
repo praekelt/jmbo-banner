@@ -1,8 +1,8 @@
 Changelog
 =========
 
-next
-----
+0.1.3
+-----
 #. Create list item templates for code banners.
 
 0.1.2
