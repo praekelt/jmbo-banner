@@ -1,6 +1,10 @@
 Changelog
 =========
 
+next
+----
+#. Google DFP banner functionality for web and mobi. This facilitates advertising and tracking using Google's DFP service.
+
 0.1.3
 -----
 #. Create list item templates for code banners.
