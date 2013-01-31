@@ -3,7 +3,7 @@ from django.conf import settings
 from django.contrib import admin
 
 from banner.models import BannerPreferences, BannerOption, CodeBanner, \
-        ImageBanner
+        ImageBanner, DFPBanner
 from jmbo.admin import ModelBaseAdmin
 
 
@@ -77,3 +77,4 @@ class BannerPreferencesAdmin(admin.ModelAdmin):
 admin.site.register(BannerPreferences, BannerPreferencesAdmin)
 admin.site.register(CodeBanner, ModelBaseAdmin)
 admin.site.register(ImageBanner, ModelBaseAdmin)
+admin.site.register(DFPBanner, ModelBaseAdmin)

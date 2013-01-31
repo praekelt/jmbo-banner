@@ -15,15 +15,41 @@ embedded for this banner.'
     )
 
 
-class ImageBanner(Banner):
+class BaseImageBanner(Banner):
+    """For every different aspect ratio of image banner a subclass is required.
+    Use this class as base."""
     url = models.CharField(
         max_length='256',
         verbose_name='URL',
         help_text='URL (internal or external) to which this banner will link.'
     )
 
+    class Meta:
+        abstract = True
+
     def get_absolute_url(self):
         return self.url
+
+
+class ImageBanner(BaseImageBanner):
+    pass
+
+
+class DFPBanner(Banner):
+    slot_name = models.CharField(
+        max_length=256, 
+        help_text="An identifier provided by Google, eg. /1234/travel."
+    )
+    width = models.PositiveIntegerField()
+    height = models.PositiveIntegerField()
+    targeting_key = models.CharField(
+        max_length=128, 
+        help_text="Eg. 'interests'."
+    )
+    targeting_values = models.TextField(
+        help_text="""Eg. 'sports'. One entry per line. Entries are allowed to \
+contain spaces."""
+        )
 
 
 class BannerPreferences(Preferences):
