@@ -4,6 +4,8 @@ Changelog
 next
 ----
 #. Google DFP banner functionality for web and mobi. This facilitates advertising and tracking using Google's DFP service.
+#. `urls.py` created. Be sure to add it to your project urls.
+#. Dependency on `django-dfp>=0.1.1`.
 
 0.1.3
 -----
