@@ -27,12 +27,6 @@ class BaseImageBanner(Banner):
         verbose_name='URL',
         help_text='URL (internal or external) to which this banner will link.'
     )
-    dfp_tracking_url = models.CharField(
-        max_length=256, 
-        blank=True, 
-        null=True, 
-        help_text="An optional URL to track impressions of this banner."
-    )
     dfp_slot_name = models.CharField(
         max_length=256, 
         null=True,
@@ -61,16 +55,13 @@ by Google, eg. /1234/travel. Used to track clicks."""
         return self.url
 
     @property
-    def dfp_tracking_url_nocache(self):
-        # Add a random parameter to the url to prevent caching
-        url = self.dfp_tracking_url
-        if not url:
-            return ''
-        rand_id = str(randint(0, 2000000000))
-        if url.find('?') != -1:            
-            return url + '&rnd=' + rand_id
-        else:
-            return url + '?rnd=' + rand_id
+    def dfp_tracking_url(self):
+        # http://support.google.com/dfp_sb/bin/answer.py?hl=en&answer=1651549 
+        # tracking pixel section.
+        # xxx: I was expecting an ad id but there is none in the example.
+        url = "http://pubads.g.doubleclick.net/gampad/ad?iu=%s&sz=1x1&t=&c=%s" % \
+            (self.dfp_slot_name, randint(0, 2000000000))
+        return url
 
 
 class ImageBanner(BaseImageBanner):
