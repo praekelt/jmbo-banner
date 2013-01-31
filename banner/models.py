@@ -8,6 +8,7 @@ from preferences.models import Preferences
 
 
 class Banner(ModelBase):
+    """Legacy base class. Never surfaced in admin."""
     pass
 
 
@@ -76,7 +77,7 @@ class ImageBanner(BaseImageBanner):
     pass
 
 
-class DFPBanner(Banner):
+class BaseDFPBanner(Banner):
     slot_name = models.CharField(
         max_length=256, 
         help_text="""A combination of network code and ad unit as provided \
@@ -93,9 +94,16 @@ by Google, eg. /1234/travel."""
 contain spaces."""
         )
 
+    class Meta:
+        abstract = True
+
     @property
     def targeting_values_list(self):
         return self.targeting_values.split('\r\n')
+
+
+class DFPBanner(BaseDFPBanner):
+    pass
 
 
 class BannerPreferences(Preferences):
