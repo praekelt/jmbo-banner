@@ -5,3 +5,4 @@ include CHANGELOG.rst
 recursive-include banner/fixtures *
 recursive-include banner/templates *
 recursive-include banner/templatetags *
+recursive-include banner/migrations *
