@@ -1,0 +1,10 @@
+{% extends "jmbo/inclusion_tags/modelbase_detail.html" %}
+
+{% block content %}
+
+{% if object.dfp_tracking_url %}
+    <img src="{{ object.dfp_tracking_url }}" width="0" height="0" />
+{% endif %}
+<a href="{{ object.get_absolute_url }}" rel="nofollow"><img src="{{ object.image_detail_url }}" alt="{{ object.title }}" alt="{{ object.title }}" /></a>
+
+{% endblock %}
