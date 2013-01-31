@@ -74,7 +74,23 @@ class BannerPreferencesAdmin(admin.ModelAdmin):
         BannerOptionInline,
     ]
 
+
+class DFPBannerAdmin(ModelBaseAdmin):
+
+    def get_fieldsets(self, *args, **kwargs):
+        """Re-order fields"""
+        result = super(DFPBannerAdmin, self).get_fieldsets(*args, **kwargs)
+        result = list(result)
+        fields = list(result[0][1]['fields'])
+        for name in ('slot_name', 'width', 'height', 'targeting_key', \
+            'targeting_values'):
+            fields.remove(name)
+            fields.append(name)
+        result[0][1]['fields'] = tuple(fields)
+        return tuple(result)
+
+
 admin.site.register(BannerPreferences, BannerPreferencesAdmin)
 admin.site.register(CodeBanner, ModelBaseAdmin)
 admin.site.register(ImageBanner, ModelBaseAdmin)
-admin.site.register(DFPBanner, ModelBaseAdmin)
+admin.site.register(DFPBanner, DFPBannerAdmin)

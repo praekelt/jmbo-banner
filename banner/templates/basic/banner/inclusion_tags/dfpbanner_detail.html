@@ -1,0 +1,8 @@
+{% extends "jmbo/inclusion_tags/modelbase_detail.html" %}
+{% load dfp_tags %}
+
+{% block content %}
+
+{% dfp_tag object.slot_name object.width object.height object.targeting_key object.targeting_values_list %}
+
+{% endblock %}

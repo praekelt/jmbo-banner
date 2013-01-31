@@ -51,6 +51,10 @@ class DFPBanner(Banner):
 contain spaces."""
         )
 
+    @property
+    def targeting_values_list(self):
+        return self.targeting_values.split('\r\n')
+
 
 class BannerPreferences(Preferences):
     __module__ = 'preferences.models'
