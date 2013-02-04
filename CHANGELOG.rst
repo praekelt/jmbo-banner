@@ -1,6 +1,11 @@
 Changelog
 =========
 
+0.2.1
+-----
+#. Hotfix release. Add missing files.
+#. Display error message in admin interface to notify of missing banner urls. 
+
 0.2
 ---
 #. Google DFP banner functionality for web and mobi. This facilitates advertising and tracking using Google's DFP service.
