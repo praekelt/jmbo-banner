@@ -1,6 +1,7 @@
 from django import forms
 from django.conf import settings
 from django.contrib import admin
+from django.core.urlresolvers import NoReverseMatch
 
 from banner.models import BannerPreferences, BannerOption, CodeBanner, \
         ImageBanner, DFPBanner
@@ -75,6 +76,17 @@ class BannerPreferencesAdmin(admin.ModelAdmin):
     ]
 
 
+class ImageBannerAdmin(ModelBaseAdmin):
+
+    def _get_absolute_url(self, obj):
+        try:
+            return super(ImageBannerAdmin, self)._get_absolute_url(obj)
+        except NoReverseMatch:
+            return "Add banner urls to settings, e.g. <code>(r'^banner/', include('banner.urls'))</code>"
+    _get_absolute_url.short_description = 'Permalink'
+    _get_absolute_url.allow_tags = True
+
+
 class DFPBannerAdmin(ModelBaseAdmin):
 
     def get_fieldsets(self, *args, **kwargs):
@@ -92,5 +104,5 @@ class DFPBannerAdmin(ModelBaseAdmin):
 
 admin.site.register(BannerPreferences, BannerPreferencesAdmin)
 admin.site.register(CodeBanner, ModelBaseAdmin)
-admin.site.register(ImageBanner, ModelBaseAdmin)
+admin.site.register(ImageBanner, ImageBannerAdmin)
 admin.site.register(DFPBanner, DFPBannerAdmin)
