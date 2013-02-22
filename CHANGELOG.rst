@@ -1,9 +1,9 @@
 Changelog
 =========
 
-next
-----
-#. DFP banners draw themselves when loaded via ajax.
+0.2.2
+-----
+#. DFP banners draw themselves when loaded via ajax. The code is in the new banner.js.
 
 0.2.1
 -----
