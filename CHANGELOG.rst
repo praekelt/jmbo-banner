@@ -1,6 +1,10 @@
 Changelog
 =========
 
+next
+----
+#. DFP banners draw themselves when loaded via ajax.
+
 0.2.1
 -----
 #. Hotfix release. Add missing files.
