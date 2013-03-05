@@ -1,8 +1,8 @@
 Changelog
 =========
 
-next
-----
+0.2.3
+-----
 #. Add a BannerProxy model that inspects the URL and renders a banner designated to render for that URL.
 
 0.2.2
