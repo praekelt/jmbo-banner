@@ -1,3 +1,4 @@
+import re
 from random import randint
 
 from django.db import models
@@ -9,7 +10,14 @@ from preferences.models import Preferences
 
 class Banner(ModelBase):
     """Legacy base class. Never surfaced in admin."""
-    pass
+    paths = models.TextField(
+        null=True, 
+        blank=True, 
+        help_text="""A list of regular expressions that match the path. This \
+is used to find a banner to render when using a banner proxy. One entry per \
+line. If you are unfamiliar with regular expressions then enter the relative \
+URL to an item, eg. /post/my-post."""
+    )
 
 
 class CodeBanner(Banner):
@@ -95,6 +103,29 @@ contain spaces."""
 
 class DFPBanner(BaseDFPBanner):
     pass
+
+
+class BannerProxy(ModelBase):
+    """A banner that inspects the path and renders another banner"""
+    banners = models.ManyToManyField(
+        Banner,
+        blank=True,
+        help_text="""A list of banners which are proxied by this item. It is \
+useful if a page contains more than one banner proxy."""
+    )
+
+    def get_actual_banner(self, request):
+        """Return first banner matching the path"""
+        request_path = request.META['PATH_INFO']
+        # Try our set of banners. If not found then inspect 50 banners.
+        banners = Banner.permitted.filter(id__in=self.banners.all())
+        if not banners.exists():
+            banners = Banner.permitted.exclude(paths=None)[:50]
+        for banner in banners:      
+            for path in banner.paths.split('\n'):
+                if re.match(r'%s' % path, request_path):
+                    return banner.as_leaf_class()
+        return None
 
 
 class BannerPreferences(Preferences):

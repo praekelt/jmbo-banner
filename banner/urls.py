@@ -11,4 +11,5 @@ urlpatterns = patterns(
         {},
         name='banner-dfp-click-proxy'
     ),
+
 )
