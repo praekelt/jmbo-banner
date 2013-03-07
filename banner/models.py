@@ -120,7 +120,7 @@ useful if a page contains more than one banner proxy."""
         related_name='bannerproxy_default_banner'
     )
 
-    class Mets:
+    class Meta:
         verbose_name_plural = 'Banner proxies'
 
     def get_actual_banner(self, request):
@@ -131,17 +131,20 @@ useful if a page contains more than one banner proxy."""
         if qs:
             request_path = request_path + '?' + qs
 
-        # Try our set of banners. If not found then inspect 50 banners.
+        # Try our set of banners
         banners = Banner.permitted.filter(id__in=self.banners.all())
-        if not banners.exists():
-            banners = Banner.permitted.exclude(paths=None)[:50]
         for banner in banners:      
             for path in banner.paths.split('\n'):
                 if re.search(r'%s' % path, request_path):
                     return banner.as_leaf_class()
 
+        # Fall back to default banner
         if self.default_banner:
-            return self.default_banner.as_leaf_class()
+            try:
+                default_banner = Banner.permitted.get(id=self.default_banner.id)
+                return default_banner.as_leaf_class()
+            except Banner.DoesNotExist:
+                pass
 
         return None            
 
