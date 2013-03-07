@@ -1,6 +1,10 @@
 Changelog
 =========
 
+0.2.4.2
+-------
+#. Hotfix. Properly fall back to default banner if it is set.
+
 0.2.4.1
 -------
 #. Hotfix. Add missing migration.
