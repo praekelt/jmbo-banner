@@ -1,8 +1,8 @@
 Changelog
 =========
 
-next
-----
+0.2.4
+-----
 #. Use search instead of match for regular expressions.
 #. A Banner Proxy now has an optional default banner.
 #. Consider query string when doing regex matching for Banner Proxies.
