@@ -1,6 +1,12 @@
 Changelog
 =========
 
+next
+----
+#. Use search instead of match for regular expressions.
+#. A Banner Proxy now has an optional default banner.
+#. Consider query string when doing regex matching for Banner Proxies.
+
 0.2.3
 -----
 #. Add a BannerProxy model that inspects the URL and renders a banner designated to render for that URL.

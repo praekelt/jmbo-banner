@@ -113,19 +113,37 @@ class BannerProxy(ModelBase):
         help_text="""A list of banners which are proxied by this item. It is \
 useful if a page contains more than one banner proxy."""
     )
+    default_banner = models.ForeignKey(
+        Banner, 
+        blank=True, 
+        null=True, 
+        related_name='bannerproxy_default_banner'
+    )
+
+    class Mets:
+        verbose_name_plural = 'Banner proxies'
 
     def get_actual_banner(self, request):
         """Return first banner matching the path"""
+        #import pdb;pdb.set_trace()
         request_path = request.META['PATH_INFO']
+        qs = request.META.get('QUERY_STRING')
+        if qs:
+            request_path = request_path + '?' + qs
+
         # Try our set of banners. If not found then inspect 50 banners.
         banners = Banner.permitted.filter(id__in=self.banners.all())
         if not banners.exists():
             banners = Banner.permitted.exclude(paths=None)[:50]
         for banner in banners:      
             for path in banner.paths.split('\n'):
-                if re.match(r'%s' % path, request_path):
+                if re.search(r'%s' % path, request_path):
                     return banner.as_leaf_class()
-        return None
+
+        if self.default_banner:
+            return self.default_banner.as_leaf_class()
+
+        return None            
 
 
 class BannerPreferences(Preferences):
