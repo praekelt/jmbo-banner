@@ -1,6 +1,10 @@
 Changelog
 =========
 
+0.2.4.1
+-------
+#. Hotfix. Add missing migration.
+
 0.2.4
 -----
 #. Use search instead of match for regular expressions.
