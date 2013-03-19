@@ -1,6 +1,10 @@
 Changelog
 =========
 
+0.2.4.3
+-------
+#. Hotfix. Skip over empty paths to avoid an exception.
+
 0.2.4.2
 -------
 #. Hotfix. Properly fall back to default banner if it is set.
