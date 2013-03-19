@@ -134,9 +134,10 @@ useful if a page contains more than one banner proxy."""
         # Try our set of banners
         banners = Banner.permitted.filter(id__in=self.banners.all())
         for banner in banners:      
-            for path in banner.paths.split('\n'):
-                if re.search(r'%s' % path, request_path):
-                    return banner.as_leaf_class()
+            if banner.paths:
+                for path in banner.paths.split('\n'):
+                    if re.search(r'%s' % path, request_path):
+                        return banner.as_leaf_class()
 
         # Fall back to default banner
         if self.default_banner:
