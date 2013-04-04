@@ -1,6 +1,10 @@
 Changelog
 =========
 
+0.2.4.4
+-------
+# Hotfix. Split paths on any whitespace.
+
 0.2.4.3
 -------
 #. Hotfix. Skip over empty paths to avoid an exception.
