@@ -1,6 +1,10 @@
 Changelog
 =========
 
+0.2.5
+-----
+#. Multiple banners that match a regex are now randomized to effect banner rotation.
+
 0.2.4.4
 -------
 # Hotfix. Split paths on any whitespace.
