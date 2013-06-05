@@ -125,14 +125,13 @@ useful if a page contains more than one banner proxy."""
 
     def get_actual_banner(self, request):
         """Return first banner matching the path"""
-        #import pdb;pdb.set_trace()
         request_path = request.META['PATH_INFO']
         qs = request.META.get('QUERY_STRING')
         if qs:
             request_path = request_path + '?' + qs
 
         # Try our set of banners
-        banners = Banner.permitted.filter(id__in=self.banners.all())
+        banners = Banner.permitted.filter(id__in=self.banners.all()).order_by('?')
         for banner in banners:      
             if banner.paths:
                 for path in banner.paths.split():
