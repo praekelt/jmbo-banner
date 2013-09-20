@@ -1,3 +1,5 @@
-{% load dfp_tags %}
+{% load dfp_tags jmbo_template_tags %}
 
-{% dfp_tag object.slot_name object.width object.height object.targeting_key object.targeting_values_list %}
+{% jmbocache 3600 'dfpbanner-list-item-inclusion' object.id object.modified %}
+    {% dfp_tag object.slot_name object.width object.height object.targeting_key object.targeting_values_list %}
+{% endjmbocache %}

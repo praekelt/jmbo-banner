@@ -1,1 +1,5 @@
-{{ object.code|safe }}
+{% load jmbo_template_tags %}
+
+{% jmbocache 3600 'codebanner-list-item-pinned-inclusion' object.id object.modified %}
+    {{ object.code|safe }}
+{% endjmbocache %}
