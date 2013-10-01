@@ -2,12 +2,10 @@
 {% load jmbo_inclusion_tags jmbo_template_tags banner_tags %}
 
 {% block content %}
-    {% jmbocache 3600 'object-detail-inclusion' object.id object.modified %}
-        {% get_actual_banner for object as 'actual_banner' %}
-        {% if actual_banner %}
-            {% render_object actual_banner "detail" %}
-        {% else %}
-            <a href="{{ object.get_absolute_url }}" rel="nofollow"><img src="{{ object.image_detail_url }}" alt="{{ object.title }}" alt="{{ object.title }}" /></a>
-        {% endif %}
-    {% endjmbocache %}
+    {% get_actual_banner for object as 'actual_banner' %}
+    {% if actual_banner %}
+        {% render_object actual_banner "detail" %}
+    {% else %}
+        <a href="{{ object.get_absolute_url }}" rel="nofollow"><img src="{{ object.image_detail_url }}" alt="{{ object.title }}" alt="{{ object.title }}" /></a>
+    {% endif %}
 {% endblock %}

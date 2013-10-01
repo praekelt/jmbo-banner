@@ -1,10 +1,8 @@
 {% load jmbo_inclusion_tags jmbo_template_tags banner_tags foundry_tags %}
 
-{% jmbocache 3600 'bannerproxy-list-item-pinned-inclusion' object.id object.modified %}
-    {% get_actual_banner for object as 'actual_banner' %}
-    {% if actual_banner %}
-        {% render_object actual_banner 'list_item' %}
-    {% else %}
-        <a href="{{ object.get_absolute_url }}" rel="nofollow"><img src="{{ object.get_imagebanner_list_item_LAYER_url }}" alt="{{ object.title }}" alt="{{ object.title }}" /></a>
-    {% endif %}
-{% endjmbocache %}
+{% get_actual_banner for object as 'actual_banner' %}
+{% if actual_banner %}
+    {% render_object actual_banner 'list_item' %}
+{% else %}
+    <a href="{{ object.get_absolute_url }}" rel="nofollow"><img src="{{ object.get_imagebanner_list_item_LAYER_url }}" alt="{{ object.title }}" alt="{{ object.title }}" /></a>
+{% endif %}
