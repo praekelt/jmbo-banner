@@ -1,10 +1,11 @@
 {% extends "jmbo/inclusion_tags/modelbase_detail.html" %}
+{% load jmbo_template_tags %}
 
 {% block content %}
-
-{% if object.dfp_tracking_url %}
-    <img src="{{ object.dfp_tracking_url }}" width="0" height="0" />
-{% endif %}
-<a href="{{ object.get_absolute_url }}" rel="nofollow"><img src="{{ object.image_detail_url }}" alt="{{ object.title }}" alt="{{ object.title }}" /></a>
-
+    {% jmbocache 3600 'object-detail-inclusion' object.id object.modified %}
+        {% if object.dfp_tracking_url %}
+            <img src="{{ object.dfp_tracking_url }}" width="0" height="0" />
+        {% endif %}
+        <a href="{{ object.get_absolute_url }}" rel="nofollow"><img src="{{ object.image_detail_url }}" alt="{{ object.title }}" alt="{{ object.title }}" /></a>
+    {% endjmbocache %}
 {% endblock %}

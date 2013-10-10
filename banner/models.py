@@ -11,8 +11,8 @@ from preferences.models import Preferences
 class Banner(ModelBase):
     """Legacy base class. Never surfaced in admin."""
     paths = models.TextField(
-        null=True, 
-        blank=True, 
+        null=True,
+        blank=True,
         help_text="""A list of regular expressions that match the path. This \
 is used to find a banner to render when using a banner proxy. One entry per \
 line. If you are unfamiliar with regular expressions then enter the relative \
@@ -36,7 +36,7 @@ class BaseImageBanner(Banner):
         help_text='URL (internal or external) to which this banner will link.'
     )
     dfp_slot_name = models.CharField(
-        max_length=256, 
+        max_length=256,
         null=True,
         blank=True,
         help_text="""A combination of network code and ad unit as provided \
@@ -56,7 +56,7 @@ by Google, eg. /1234/travel. Used to track clicks."""
         if self.dfp_slot_name and self.dfp_ad_id:
             url = "%s?slot_name=%s&ad_id=%s&url=%s" % \
             (
-                reverse('banner-dfp-click-proxy'), self.dfp_slot_name, 
+                reverse('banner-dfp-click-proxy'), self.dfp_slot_name,
                 self.dfp_ad_id, self.url
             )
             return url
@@ -64,7 +64,7 @@ by Google, eg. /1234/travel. Used to track clicks."""
 
     @property
     def dfp_tracking_url(self):
-        # http://support.google.com/dfp_sb/bin/answer.py?hl=en&answer=1651549 
+        # http://support.google.com/dfp_sb/bin/answer.py?hl=en&answer=1651549
         # tracking pixel section.
         # xxx: I was expecting an ad id but there is none in the example.
         url = "http://pubads.g.doubleclick.net/gampad/ad?iu=%s&sz=1x1&t=&c=%s" % \
@@ -78,14 +78,14 @@ class ImageBanner(BaseImageBanner):
 
 class BaseDFPBanner(Banner):
     slot_name = models.CharField(
-        max_length=256, 
+        max_length=256,
         help_text="""A combination of network code and ad unit as provided \
 by Google, eg. /1234/travel."""
     )
     width = models.PositiveIntegerField()
     height = models.PositiveIntegerField()
     targeting_key = models.CharField(
-        max_length=128, 
+        max_length=128,
         help_text="Eg. 'interests'."
     )
     targeting_values = models.TextField(
@@ -114,9 +114,9 @@ class BannerProxy(ModelBase):
 useful if a page contains more than one banner proxy."""
     )
     default_banner = models.ForeignKey(
-        Banner, 
-        blank=True, 
-        null=True, 
+        Banner,
+        blank=True,
+        null=True,
         related_name='bannerproxy_default_banner'
     )
 
@@ -125,14 +125,11 @@ useful if a page contains more than one banner proxy."""
 
     def get_actual_banner(self, request):
         """Return first banner matching the path"""
-        request_path = request.META['PATH_INFO']
-        qs = request.META.get('QUERY_STRING')
-        if qs:
-            request_path = request_path + '?' + qs
 
         # Try our set of banners
+        request_path = request.get_full_path()
         banners = Banner.permitted.filter(id__in=self.banners.all()).order_by('?')
-        for banner in banners:      
+        for banner in banners:
             if banner.paths:
                 for path in banner.paths.split():
                     if re.search(r'%s' % path, request_path):
@@ -146,7 +143,7 @@ useful if a page contains more than one banner proxy."""
             except Banner.DoesNotExist:
                 pass
 
-        return None            
+        return None
 
 
 class BannerPreferences(Preferences):

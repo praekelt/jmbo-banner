@@ -1,6 +1,11 @@
 Changelog
 =========
 
+0.2.6
+-----
+#. If there is no actual banner and the banner proxy has no image set then don't render anything.
+#. Cache templates.
+
 0.2.5
 -----
 #. Multiple banners that match a regex are now randomized to effect banner rotation.
