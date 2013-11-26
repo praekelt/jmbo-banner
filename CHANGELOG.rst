@@ -1,6 +1,10 @@
 Changelog
 =========
 
+next
+----
+#. Remove redundant tests.
+
 0.2.6
 -----
 #. If there is no actual banner and the banner proxy has no image set then don't render anything.

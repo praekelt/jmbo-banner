@@ -1,17 +1,13 @@
-DATABASE_ENGINE = 'sqlite3'
+from foundry.settings import *
 
-INSTALLED_APPS = [
-    'django.contrib.contenttypes',
-    'django.contrib.sites',
-    'banner',
-    'category',
-    'jmbo',
-    'photologue',
-    'preferences',
-    'publisher',
-    'secretballot',
-]
 
-ROOT_URLCONF = 'banner.tests.urls'
-
-SITE_ID = 1
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.contrib.gis.db.backends.spatialite',
+        'NAME': 'test_banner.db',
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': '',
+        'PORT': '',
+    }
+}
