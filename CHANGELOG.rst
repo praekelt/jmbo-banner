@@ -1,8 +1,8 @@
 Changelog
 =========
 
-next
-----
+0.3
+---
 #. Remove redundant tests.
 #. Use newer version of `django-dfp`. If you have customized `dfpbanner_detail.html` or `dfpbanner_list_item.html` then you need to update them.
 
