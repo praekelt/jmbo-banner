@@ -4,6 +4,7 @@ Changelog
 next
 ----
 #. Remove redundant tests.
+#. Use newer version of `django-dfp`.
 
 0.2.6
 -----
