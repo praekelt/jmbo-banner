@@ -1,6 +1,11 @@
 Changelog
 =========
 
+0.3
+---
+#. Remove redundant tests.
+#. Use newer version of `django-dfp`. If you have customized `dfpbanner_detail.html` or `dfpbanner_list_item.html` then you need to update them.
+
 0.2.6
 -----
 #. If there is no actual banner and the banner proxy has no image set then don't render anything.

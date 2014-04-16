@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='jmbo-banner',
-    version='0.2.6',
+    version='0.3',
     description='Jmbo banner app.',
     long_description = open('README.rst', 'r').read() + open('AUTHORS.rst', 'r').read() + open('CHANGELOG.rst', 'r').read(),
     author='Praekelt Foundation',
@@ -12,7 +12,7 @@ setup(
     packages = find_packages(),
     install_requires = [
         'jmbo-foundry>=0.7',
-        'django-dfp>=0.2.1',
+        'django-dfp>=0.3.1',
     ],
     tests_require=[
         'django-setuptest>=0.1.2',
