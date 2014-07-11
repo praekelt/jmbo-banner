@@ -52,7 +52,7 @@ by Google, eg. /1234/travel. Used to track clicks."""
     class Meta:
         abstract = True
 
-    def get_absolute_url(self):
+    def get_target_url(self):
         if self.dfp_slot_name and self.dfp_ad_id:
             url = "%s?slot_name=%s&ad_id=%s&url=%s" % \
             (
