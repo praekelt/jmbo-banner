@@ -52,7 +52,7 @@ by Google, eg. /1234/travel. Used to track clicks."""
     class Meta:
         abstract = True
 
-    def get_absolute_url(self):
+    def get_target_url(self):
         if self.dfp_slot_name and self.dfp_ad_id:
             url = "%s?slot_name=%s&ad_id=%s&url=%s" % \
             (
@@ -67,8 +67,11 @@ by Google, eg. /1234/travel. Used to track clicks."""
         # http://support.google.com/dfp_sb/bin/answer.py?hl=en&answer=1651549
         # tracking pixel section.
         # xxx: I was expecting an ad id but there is none in the example.
-        url = "http://pubads.g.doubleclick.net/gampad/ad?iu=%s&sz=1x1&t=&c=%s" % \
-            (self.dfp_slot_name, randint(0, 2000000000))
+        if self.dfp_slot_name:
+            url = "http://pubads.g.doubleclick.net/gampad/ad?iu=%s&sz=1x1&t=&c=%s" % \
+                (self.dfp_slot_name, randint(0, 2000000000))
+        else:
+            url = ''
         return url
 
 
@@ -128,12 +131,20 @@ useful if a page contains more than one banner proxy."""
 
         # Try our set of banners
         request_path = request.get_full_path()
+        path_banner_pairs = []
         banners = Banner.permitted.filter(id__in=self.banners.all()).order_by('?')
         for banner in banners:
             if banner.paths:
                 for path in banner.paths.split():
-                    if re.search(r'%s' % path, request_path):
-                        return banner.as_leaf_class()
+                    path_banner_pairs.append((path, banner))
+
+        # Sort banner pairs because we want the best regex match
+        path_banner_pairs.sort(lambda a, b: cmp(len(b[0]), len(a[0])))
+
+        # Return first match
+        for path, banner in path_banner_pairs:
+            if re.search(r'%s' % path, request_path):
+                return banner.as_leaf_class()
 
         # Fall back to default banner
         if self.default_banner:

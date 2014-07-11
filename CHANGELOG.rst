@@ -1,6 +1,10 @@
 Changelog
 =========
 
+0.4
+---
+#. Rename `get_absolute_url` method to `get_target_url` since it was breaking Jmbo convention. If you have customized `imagebanner_*.html` then you need to update them.
+
 0.3
 ---
 #. Remove redundant tests.
@@ -48,7 +52,7 @@ Changelog
 0.2.1
 -----
 #. Hotfix release. Add missing files.
-#. Display error message in admin interface to notify of missing banner urls. 
+#. Display error message in admin interface to notify of missing banner urls.
 
 0.2
 ---
