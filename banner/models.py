@@ -131,12 +131,20 @@ useful if a page contains more than one banner proxy."""
 
         # Try our set of banners
         request_path = request.get_full_path()
+        path_banner_pairs = []
         banners = Banner.permitted.filter(id__in=self.banners.all()).order_by('?')
         for banner in banners:
             if banner.paths:
                 for path in banner.paths.split():
-                    if re.search(r'%s' % path, request_path):
-                        return banner.as_leaf_class()
+                    path_banner_pairs.append((path, banner))
+
+        # Sort banner pairs because we want the best regex match
+        path_banner_pairs.sort(lambda a, b: cmp(len(b[0]), len(a[0])))
+
+        # Return first match
+        for path, banner in path_banner_pairs:
+            if re.search(r'%s' % path, request_path):
+                return banner.as_leaf_class()
 
         # Fall back to default banner
         if self.default_banner:
