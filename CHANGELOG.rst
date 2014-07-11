@@ -1,8 +1,8 @@
 Changelog
 =========
 
-next
-----
+0.4
+---
 #. Rename `get_absolute_url` method to `get_target_url` since it was breaking Jmbo convention. If you have customized `imagebanner_*.html` then you need to update them.
 
 0.3
