@@ -67,8 +67,11 @@ by Google, eg. /1234/travel. Used to track clicks."""
         # http://support.google.com/dfp_sb/bin/answer.py?hl=en&answer=1651549
         # tracking pixel section.
         # xxx: I was expecting an ad id but there is none in the example.
-        url = "http://pubads.g.doubleclick.net/gampad/ad?iu=%s&sz=1x1&t=&c=%s" % \
-            (self.dfp_slot_name, randint(0, 2000000000))
+        if self.dfp_slot_name:
+            url = "http://pubads.g.doubleclick.net/gampad/ad?iu=%s&sz=1x1&t=&c=%s" % \
+                (self.dfp_slot_name, randint(0, 2000000000))
+        else:
+            url = ''
         return url
 
 
