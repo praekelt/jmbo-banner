@@ -11,7 +11,7 @@ class WgetThread(threading.Thread):
         self.url = url
 
     def run(self):
-        result = urllib2.urlopen(self.url).read()
+        return urllib2.urlopen(self.url).read()
 
 
 def dfp_click_proxy(request):
@@ -21,3 +21,10 @@ def dfp_click_proxy(request):
     t = WgetThread(url)
     t.start()
     return HttpResponseRedirect(request.GET['url'])
+
+
+def dfp_import(request):
+    """
+    Fire off an async process to import csv.
+    """
+    return HttpResponseRedirect('/admin/')
