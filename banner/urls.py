@@ -8,8 +8,5 @@ urlpatterns = patterns(
     url(
         r'^dfp-click-proxy/$', 'dfp_click_proxy', {},
         name='banner-dfp-click-proxy'
-    ),
-    url(
-        r'^dfp-import/$', 'dfp_import', name='dfp-import'
     )
 )
