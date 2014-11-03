@@ -10,6 +10,6 @@ urlpatterns = patterns(
         name='banner-dfp-click-proxy'
     ),
     url(
-        r'^/admin/banner/dfpbanner/import/$', 'dfp_import', name='dfp-import'
+        r'^dfp-import/$', 'dfp_import', name='dfp-import'
     )
 )
