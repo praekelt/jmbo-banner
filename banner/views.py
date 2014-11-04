@@ -2,10 +2,6 @@ import threading
 import urllib2
 
 from django.http import HttpResponseRedirect
-from django.shortcuts import render_to_response
-from django.template import RequestContext
-
-from banner import forms
 
 
 class WgetThread(threading.Thread):

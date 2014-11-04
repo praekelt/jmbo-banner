@@ -5,14 +5,15 @@ from django.shortcuts import render_to_response
 
 import object_tools
 
-from banner import forms, models
+from banner.forms import Import
+from banner.models import DFPBanner
 
 
 class DFPImport(object_tools.ObjectTool):
     name = 'import'
     label = 'Import'
     help_text = 'Import DFP Banners.'
-    form_class = forms.Import
+    form_class = Import
 
     def import_response(self, form):
         return {}
@@ -22,7 +23,7 @@ class DFPImport(object_tools.ObjectTool):
         if form.is_valid() and process_form:
             return self.export_response(form)
 
-        adminform = helpers.AdminForm(form, (), {})
+        adminform = helpers.AdminForm(form, form.fieldsets, {})
 
         context = {'adminform': adminform}
         context.update(extra_context or {})
@@ -34,4 +35,4 @@ class DFPImport(object_tools.ObjectTool):
             context_instance=context_instance
         )
 
-object_tools.tools.register(DFPImport, models.DFPBanner)
+object_tools.tools.register(DFPImport, DFPBanner)
