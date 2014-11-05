@@ -32,8 +32,8 @@ class CSVValidationError(Exception):
 
 class DFPImport(object_tools.ObjectTool):
     name = 'import'
-    label = 'Import'
-    help_text = 'Import DFP Banners.'
+    label = _('Import')
+    help_text = _('Import DFP Banners.')
     form_class = ImportForm
 
     def save_data(self, data):
@@ -70,7 +70,9 @@ class DFPImport(object_tools.ObjectTool):
         # validate the import files columns
         for field in DFP_IMPORT_FIELD_MAPPER.values():
             if field.lower() not in [row.lower() for row in heading_row]:
-                raise CSVValidationError("Field missing from csv: %s" % field)
+                raise CSVValidationError(
+                    _("Field missing from csv: %s" % field)
+                )
 
         self.save_data(csv.DictReader(csv_file))
 

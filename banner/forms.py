@@ -12,5 +12,5 @@ class ImportForm(forms.Form):
     def __init__(self, model, *args, **kwargs):
         super(ImportForm, self).__init__(*args, **kwargs)
         self.fieldsets = (
-            ('Import', {'fields': ('csv_file', )}),
+            (_('Import'), {'fields': ('csv_file', )}),
         )
