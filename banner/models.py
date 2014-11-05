@@ -132,7 +132,9 @@ useful if a page contains more than one banner proxy."""
         # Try our set of banners
         request_path = request.get_full_path()
         path_banner_pairs = []
-        banners = Banner.permitted.filter(id__in=self.banners.all()).order_by('?')
+        banners = Banner.permitted.filter(
+            id__in=self.banners.all()
+        ).order_by('?')
         for banner in banners:
             if banner.paths:
                 for path in banner.paths.split():
