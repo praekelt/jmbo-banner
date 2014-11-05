@@ -29,14 +29,13 @@ class DFPImport(object_tools.ObjectTool):
 
     def save_data(self, data, header_exists):
         """
-        Save the data row by row to the database. Title in infered and all sites
-        are selected by default.
+        Save the data row by row to the database. Title is inferred and all
+        sites are selected by default.
         """
-        # strip the header if it exisits
+        # strip the header if it exists
         data = data if not header_exists else list(data)[1:]
 
         for row in data:
-            print row
             # get the entry if it already exists
             try:
                 obj = DFPBanner.objects.get(
