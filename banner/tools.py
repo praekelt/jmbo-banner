@@ -14,20 +14,11 @@ from banner.forms import ImportForm
 from banner.models import DFPBanner
 
 
-DFP_IMPORT_FIELD_MAPPER = getattr(settings, 'DFP_IMPORT_FIELD_MAPPER', {
-    'title': 'Title',
-    'slot_name': 'Slot Name',
-    'width': 'Width',
-    'height': 'Height',
-    'targeting_key': 'Targeting Key',
-    'targeting_values': 'Targeting Value',
-    'paths': 'Paths',
-    'subtitle': 'Comment'
-})
-
-
-class CSVValidationError(Exception):
-    pass
+# order is import
+DFP_IMPORT_FIELDS = getattr(settings, 'DFP_IMPORT_FIELDS', [
+    'title', 'slot_name', 'width', 'height', 'targeting_key',
+    'targeting_values', 'paths', 'subtitle'
+])
 
 
 class DFPImport(object_tools.ObjectTool):
@@ -36,18 +27,21 @@ class DFPImport(object_tools.ObjectTool):
     help_text = _('Import DFP Banners.')
     form_class = ImportForm
 
-    def save_data(self, data):
+    def save_data(self, data, header_exists):
         """
         Save the data row by row to the database. Title in infered and all sites
         are selected by default.
         """
-        for row in data:
+        # strip the header if it exisits
+        data = data if not header_exists else list(data)[1:]
 
+        for row in data:
+            print row
             # get the entry if it already exists
             try:
-                title_key = DFP_IMPORT_FIELD_MAPPER['title']
                 obj = DFPBanner.objects.get(
-                    title=row[title_key]
+                    title=row['title'],
+                    subtitle=row['subtitle']
                 )
             except (DFPBanner.DoesNotExist, KeyError):
                 obj = None
@@ -57,29 +51,40 @@ class DFPImport(object_tools.ObjectTool):
                 obj = DFPBanner()
 
             # map the fields from the imported csv
-            for key, value in DFP_IMPORT_FIELD_MAPPER.items():
-                setattr(obj, key, row[value])
+            for field in DFP_IMPORT_FIELDS:
+                setattr(obj, field, row[field])
 
-            obj.sites = [s.pk for s in Site.objects.all()]
             obj.save()
 
-    def validate(self, form):
+            # add all sites by default - this need to be done after initial save
+            # to prevent runtime error related to jmbo.models.ModelBase.__unicode__
+            obj.sites = [s for s in Site.objects.all()]
+            obj.save()
+
+    def handle_import(self, form):
         csv_file = form.files['csv_file']
         heading_row = csv.reader(csv_file).next()
 
-        # validate the import files columns
-        for field in DFP_IMPORT_FIELD_MAPPER.values():
-            if field.lower() not in [row.lower() for row in heading_row]:
-                raise CSVValidationError(
-                    _("Field missing from csv: %s" % field)
-                )
+        # determine if a header row exists
+        header_exists = bool([
+            field for field in DFP_IMPORT_FIELDS
+            if field in [
+                header.replace(" ", "_").lower() for header in heading_row
+            ]
+        ])
 
-        self.save_data(csv.DictReader(csv_file))
+        data_dict = csv.DictReader(
+            csv_file, fieldnames=DFP_IMPORT_FIELDS
+        )
+
+        self.save_data(data_dict, header_exists)
 
     def view(self, request, extra_context=None, process_form=True):
         form = extra_context['form']
+
+        # valid form and handle the import
         if form.is_valid() and process_form:
-            self.validate(form)
+            self.handle_import(form)
             message = _('The DFP banners have been successfully imported.')
             messages.add_message(request, messages.SUCCESS, message)
 
