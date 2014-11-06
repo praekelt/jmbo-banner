@@ -1,10 +1,7 @@
-from django import forms
-from django.conf import settings
 from django.contrib import admin
 from django.core.urlresolvers import NoReverseMatch
 
-from banner.models import BannerPreferences, BannerOption, CodeBanner, \
-        ImageBanner, DFPBanner, BannerProxy
+from banner.models import CodeBanner, ImageBanner, DFPBanner, BannerProxy
 from jmbo.admin import ModelBaseAdmin
 
 
@@ -15,6 +12,7 @@ class ImageBannerAdmin(ModelBaseAdmin):
             return super(ImageBannerAdmin, self)._get_absolute_url(obj)
         except NoReverseMatch:
             return "Add banner urls to settings, e.g. <code>(r'^banner/', include('banner.urls'))</code>"
+
     _get_absolute_url.short_description = 'Permalink'
     _get_absolute_url.allow_tags = True
 
@@ -26,11 +24,12 @@ class DFPBannerAdmin(ModelBaseAdmin):
         result = super(DFPBannerAdmin, self).get_fieldsets(*args, **kwargs)
         result = list(result)
         fields = list(result[0][1]['fields'])
-        for name in ('slot_name', 'width', 'height', 'targeting_key', \
-            'targeting_values', 'paths'):
+        for name in ('slot_name', 'width', 'height', 'targeting_key',
+                     'targeting_values', 'paths'):
             fields.remove(name)
             fields.append(name)
         result[0][1]['fields'] = tuple(fields)
+
         return tuple(result)
 
 
