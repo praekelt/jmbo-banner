@@ -14,7 +14,7 @@ from banner.forms import ImportForm
 from banner.models import DFPBanner
 
 
-# order is import
+# order is important
 DFP_IMPORT_FIELDS = getattr(settings, 'DFP_IMPORT_FIELDS', [
     'title', 'slot_name', 'width', 'height', 'targeting_key',
     'targeting_values', 'paths', 'subtitle'
