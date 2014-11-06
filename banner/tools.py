@@ -94,7 +94,7 @@ class DFPImport(object_tools.ObjectTool):
         context_instance = template.RequestContext(request)
 
         return render_to_response(
-            'banner/import_form.html',
+            'admin/banner/import_form.html',
             context,
             context_instance=context_instance
         )
