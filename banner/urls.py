@@ -6,10 +6,7 @@ urlpatterns = patterns(
 
     # Click proxy. No need for pretty urls.
     url(
-        r'^dfp-click-proxy/$',
-        'dfp_click_proxy',
-        {},
+        r'^dfp-click-proxy/$', 'dfp_click_proxy', {},
         name='banner-dfp-click-proxy'
-    ),
-
+    )
 )
