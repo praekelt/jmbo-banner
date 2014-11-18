@@ -24,7 +24,6 @@ INSTALLED_APPS = (
     'category',
     'likes',
     'secretballot',
-    'pagination',
     'publisher',
     'preferences',
     'dfp',
