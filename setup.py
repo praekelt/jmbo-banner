@@ -12,7 +12,7 @@ setup(
     packages=find_packages(),
     install_requires=[
         'jmbo>=1.1.1',
-        'django-dfp>=0.3.1',
+        'django-dfp>=0.3.3',
     ],
     tests_require=[
         'django-setuptest>=0.1.4',
