@@ -11,8 +11,8 @@ setup(
     url='http://github.com/praekelt/jmbo-banner',
     packages=find_packages(),
     install_requires=[
+        'jmbo>=1.1.1',
         'django-dfp>=0.3.1',
-        'django-object-tools>=1.0.3',
     ],
     tests_require=[
         'django-setuptest>=0.1.4',
