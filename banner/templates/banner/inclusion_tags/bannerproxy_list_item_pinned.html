@@ -1,6 +1,6 @@
-{% load jmbo_inclusion_tags jmbo_template_tags banner_tags foundry_tags %}
+{% load jmbo_inclusion_tags jmbo_template_tags banner_tags %}
 
-{% jmbocache 3600 'bannerproxy-list-item-inclusion' object.id object.modified request.get_full_path %}
+{% jmbocache 3600 'bannerproxy-list-item-pinned-inclusion' object.id object.modified request.get_full_path %}
     {% get_actual_banner for object as 'actual_banner' %}
     {% if actual_banner %}
         {% render_object actual_banner 'list_item' %}

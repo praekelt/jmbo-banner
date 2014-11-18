@@ -1,4 +1,4 @@
-{% load jmbo_template_tags foundry_tags %}
+{% load jmbo_template_tags %}
 
 {% jmbocache 3600 'imagebanner-list-item-inclusion' object.id object.modified %}
     {% if object.dfp_tracking_url %}

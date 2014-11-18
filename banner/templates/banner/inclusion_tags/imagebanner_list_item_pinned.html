@@ -1,4 +1,4 @@
-{% load jmbo_template_tags foundry_tags %}
+{% load jmbo_template_tags %}
 
 {% jmbocache 3600 'imagebanner-list-item-pinned-inclusion' object.id object.modified %}
     <a href="{{ object.get_target_url }}"><img src="{{ object.get_imagebanner_list_item_pinned_LAYER_url }}" alt="{{ object.title }}" alt="{{ object.title }}" /></a>
