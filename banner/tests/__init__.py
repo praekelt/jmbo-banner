@@ -1,3 +1,5 @@
+import os
+
 from django.test import TestCase as BaseTestCase
 from django.test.client import Client as BaseClient, RequestFactory
 from django.contrib.auth.models import User
