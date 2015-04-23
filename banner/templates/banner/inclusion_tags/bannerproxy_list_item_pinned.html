@@ -5,6 +5,8 @@
     {% if actual_banner %}
         {% render_object actual_banner 'list_item' %}
     {% else %}
-        <a href="{{ object.get_absolute_url }}" rel="nofollow"><img src="{{ object.get_imagebanner_list_item_LAYER_url }}" alt="{{ object.title }}" alt="{{ object.title }}" /></a>
+        {% if object.image %}
+            <a href="{{ object.get_absolute_url }}" rel="nofollow"><img src="{{ object.get_imagebanner_list_item_url }}" alt="{{ object.title }}" alt="{{ object.title }}" /></a>
+        {% endif %}
     {% endif %}
 {% endjmbocache %}
