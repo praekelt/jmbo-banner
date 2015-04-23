@@ -5,6 +5,16 @@ from django.template import RequestContext, loader
 
 from banner.models import ImageBanner
 
+RES_DIR = os.path.join(os.path.dirname(__file__), "res")
+IMAGE_PATH = os.path.join(RES_DIR, "image.jpg")
+
+
+def set_image(obj):
+    obj.image.save(
+        os.path.basename(IMAGE_PATH),
+        ContentFile(open(IMAGE_PATH, "rb").read())
+    )
+
 
 class TestCase(BaseTestCase):
 
@@ -27,6 +37,7 @@ class TestCase(BaseTestCase):
             owner=cls.editor, state='published',
         )
         obj.sites = [1]
+        set_image(obj)
         obj.save()
         cls.imagebanner = obj
 
