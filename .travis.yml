@@ -1,13 +1,15 @@
 addons:
-    postgresql: "9.1"
+    postgresql: "9.3"
 
 language: python
 
 python:
   - "2.7"
 
+# todo: find a way to run 1.4 tests as well. That requires jmbo>2.0.0. I don't
+# know how to do that yet.
 env:
-  - DJANGO=Django==1.4.10
+  - DJANGO=Django==1.6.8
 
 install:
   - pip install -q $DJANGO --use-mirrors
