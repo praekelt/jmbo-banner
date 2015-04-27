@@ -1,0 +1,7 @@
+{% load jmbo_template_tags %}
+
+{% jmbocache 3600 'imagebanner-list-item-pinned-inclusion' object.id object.modified %}
+    {% if object.image %}
+        <a href="{{ object.get_target_url }}"><img src="{{ object.get_imagebanner_list_item_pinned_url }}" alt="{{ object.title }}" alt="{{ object.title }}" /></a>
+    {% endif %}
+{% endjmbocache %}

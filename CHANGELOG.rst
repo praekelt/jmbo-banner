@@ -1,6 +1,15 @@
 Changelog
 =========
 
+0.6
+---
+#. Django 1.6 compatibility.
+
+0.5
+---
+#. Remove dependency on `jmbo-foundry`.
+#. Add tests.
+
 0.4
 ---
 #. Rename `get_absolute_url` method to `get_target_url` since it was breaking Jmbo convention. If you have customized `imagebanner_*.html` then you need to update them.

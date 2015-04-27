@@ -6,6 +6,8 @@
     {% if actual_banner %}
         {% render_object actual_banner "detail" %}
     {% else %}
-        <a href="{{ object.get_absolute_url }}" rel="nofollow"><img src="{{ object.image_detail_url }}" alt="{{ object.title }}" alt="{{ object.title }}" /></a>
+        {% if object.image %}
+            <a href="{{ object.get_absolute_url }}" rel="nofollow"><img src="{{ object.image_detail_url }}" alt="{{ object.title }}" alt="{{ object.title }}" /></a>
+        {% endif %}
     {% endif %}
 {% endblock %}

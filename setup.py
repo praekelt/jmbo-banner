@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='jmbo-banner',
-    version='0.5',
+    version='0.6',
     description='Jmbo banner app.',
     long_description=open('README.rst', 'r').read() + open('AUTHORS.rst', 'r').read() + open('CHANGELOG.rst', 'r').read(),
     author='Praekelt Foundation',
@@ -11,12 +11,16 @@ setup(
     url='http://github.com/praekelt/jmbo-banner',
     packages=find_packages(),
     install_requires=[
-        'jmbo-foundry>=0.7',
-        'django-dfp>=0.3.1',
-        'django-object-tools>=1.0.3',
+        # Pinned because django-dfp has no pin while jmbo has, but setuptools
+        # is not smart enough to resolve this. Also setuptools ignores the pin
+        # if in tests_require.
+        'django>=1.4,<1.7',
+        'jmbo>=1.1.1',
+        'django-dfp>=0.3.3',
     ],
     tests_require=[
-        'django-setuptest>=0.1.2',
+        'django-setuptest>=0.1.4',
+        'psycopg2',
     ],
     test_suite="setuptest.setuptest.SetupTestSuite",
     include_package_data=True,
