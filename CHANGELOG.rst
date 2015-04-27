@@ -1,8 +1,12 @@
 Changelog
 =========
 
-next
-----
+0.6
+---
+#. Django 1.6 compatibility.
+
+0.5
+---
 #. Remove dependency on `jmbo-foundry`.
 #. Add tests.
 
