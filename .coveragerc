@@ -1,0 +1,11 @@
+[run]
+branch = True
+source =
+    banner
+omit =
+    *migrations*
+    *tests*
+    *management/command*
+
+[report]
+show_missing = True
