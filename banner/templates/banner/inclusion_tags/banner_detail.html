@@ -1,1 +1,19 @@
-{% extends "jmbo/inclusion_tags/modelbase_detail.html" %}
+<div class="detail-inclusion">
+    {% block content %}
+        {% if object.title %}
+            {{ object.title }}
+        {% endif %}
+        {% if object.image %}
+            <img src="{{ object.image_detail_url }}" />
+            {% if object.image_attribution %}
+                <div class="attribution">{{ object.image_attribution }}</div>
+            {% endif %}
+        {% endif %}
+        {% if object.description %}
+            <div class="description">
+                {{ object.description|linebreaks }}
+            </div>
+        {% endif %}
+    {% endblock %}
+    <div class="clear"></div>
+</div>
