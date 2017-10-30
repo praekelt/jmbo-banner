@@ -1,15 +1,13 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 
 
-urlpatterns = patterns(
-    '',
-
+urlpatterns = [
     # Click proxy. No need for pretty urls.
-    url(
-        r'^dfp-click-proxy/$',
-        'banner.views.dfp_click_proxy',
-        {},
-        name='banner-dfp-click-proxy'
-    ),
+    # url(
+    #     r'^dfp-click-proxy/$',
+    #     'banner.views.dfp_click_proxy',
+    #     {},
+    #     name='banner-dfp-click-proxy'
+    # ),
 
-)
+]
