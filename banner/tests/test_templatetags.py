@@ -43,8 +43,18 @@ class TemplateTagTestCase(TestCase):
         result = t.render(context)
         self.failUnless("Test Banner" in result)
 
-    def test_raises_exception_if_banner_not_specified(self):
+    def test_unknown_object_renders_nothig(self):
         context = template.Context({"banner": self.banner})
+        t = template.Template(
+            """
+            {% load banner_tags %}
+            {% render_banner "unknown-banner" %}
+            """
+        )
+        result = t.render(context)
+        self.failIf("Test Banner" in result)
+
+    def test_raises_exception_if_banner_not_specified(self):
         with self.assertRaisesMessage(
             template.TemplateSyntaxError,
             "render_banner tag requires at the slug or the banner object."
