@@ -11,8 +11,8 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('jmbo', '0008_auto_20170921_2131'),
-        ('link', '0003_auto_20170922_0923'),
+        ('jmbo', '0007_auto_20170314_1546'),
+        ('link', '0002_auto_20160902_0249'),
     ]
 
     operations = [
