@@ -15,8 +15,8 @@ DATABASES = {
 
 INSTALLED_APPS = (
     'banner',
+    'banner.tests',
     'jmbo',
-    'jmbo.tests',
     'django_comments',
     'layers',
     'link',
