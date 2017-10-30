@@ -43,4 +43,4 @@ class BannerNode(template.Node):
         else:
             obj = object_or_slug
 
-        return BANNER_STYLES_MAP[obj.style]().render(context)
+        return BANNER_STYLES_MAP[obj.style](obj).render(context)
