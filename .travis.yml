@@ -1,21 +1,16 @@
-addons:
-    postgresql: "9.3"
-
+sudo: false
 language: python
+cache: pip
 
-python:
-  - "2.7"
-
-# todo: find a way to run 1.4 tests as well. That requires jmbo>2.0.0. I don't
-# know how to do that yet.
 env:
-  - DJANGO=Django==1.6.8
+  - TOXENV=django111-py27
 
 install:
-  - pip install -q $DJANGO --use-mirrors
-  - pip install -r banner/tests/requirements.txt --use-mirrors
+  - pip install tox
+  - pip install coveralls
 
-before_script:
-    - psql -U postgres -c "create database jmbo encoding 'UTF8'"
+script:
+  - tox
 
-script: python setup.py test
+after_success:
+  - coveralls
