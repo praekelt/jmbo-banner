@@ -10,7 +10,8 @@ from banner.styles import BANNER_STYLE_CLASSES
 class Banner(ModelBase):
     """Base class for all banners"""
     link = models.ForeignKey(
-        Link, help_text=_("Link to which this banner should redirect.")
+        Link, help_text=_("Link to which this banner should redirect."),
+        blank=True, null=True
     )
     background_image = models.OneToOneField(
         Image, null=True, blank=True
