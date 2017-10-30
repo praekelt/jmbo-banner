@@ -17,6 +17,7 @@ setup(
         'django>=1.11',
         'django-link',
         'jmbo',
+        'six'
     ],
     tests_require=[
         'django-setuptest>=0.1.4',
