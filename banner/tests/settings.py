@@ -24,16 +24,12 @@ INSTALLED_APPS = (
     'category',
     'likes',
     'secretballot',
-    # 'publisher',
     'preferences',
     'sites_groups',
-    # 'ultracache',
-    # 'dfp',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sites',
-    # 'south',
 )
 
 ROOT_URLCONF = 'banner.tests.urls'
