@@ -5,7 +5,7 @@ from django.template.loader import render_to_string
 from django.utils.module_loading import import_module
 
 
-class AbstractBaseStyle(object):
+class BaseStyle(object):
     image_path = "/admin/banner/images/unknown.png"
     template_name = "banner/inclusion_tags/banner_detail.html"
 
@@ -24,13 +24,9 @@ class AbstractBaseStyle(object):
         return result
 
 
-class Standard(AbstractBaseStyle):
-    pass
-
-
 BANNER_STYLE_CLASSES = []
 BANNER_STYLES_MAP = {}
-for klass in [AbstractBaseStyle, Standard]:
+for klass in [BaseStyle]:
     BANNER_STYLE_CLASSES.append(klass)
     BANNER_STYLES_MAP[klass.__name__] = klass
 
@@ -42,7 +38,8 @@ for app in apps.get_app_configs():
     else:
         for name, klass in inspect.getmembers(
             mod,
-            lambda o: inspect.isclass(o) and issubclass(o, AbstractBaseStyle)
+            lambda o: inspect.isclass(o) and issubclass(o, BaseStyle)
         ):
-            BANNER_STYLE_CLASSES.append(klass)
-            BANNER_STYLES_MAP[klass.__name__] = klass
+            if klass not in BANNER_STYLE_CLASSES:
+                BANNER_STYLE_CLASSES.append(klass)
+                BANNER_STYLES_MAP[klass.__name__] = klass
