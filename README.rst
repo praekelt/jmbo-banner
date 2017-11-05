@@ -26,15 +26,16 @@ Content types
 
 ``jmbo-banner`` defines the following content types:
 
-Button:
+**Button:**
 
 * A banner can consist of several buttons, although usually only two are used.
 
 * A button has a `text` field which can be used to specify its label, and a `link` object which can be used to specify its click-through.
 
-Banner:
+**Banner:**
 
-* A banner can be thought of as a container for promotional content.
+* A banner can be thought of as a container for promotional content. It can consist of buttons, images and promotional text
+
 
 How does it work?
 -----------------
