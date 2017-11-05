@@ -18,8 +18,6 @@ class BannerStyleTestCase(TestCase):
         # Styles should not be duplicated in the list
         # There should only be two styles in the tests,
         # namely BaseStyle and TestStyle
-        print "==============================="
-        print BANNER_STYLE_CLASSES
         self.assertEqual(len(BANNER_STYLE_CLASSES), 2)
         self.assertIn(TestStyle, BANNER_STYLE_CLASSES)
         self.assertIn(BaseStyle, BANNER_STYLE_CLASSES)
