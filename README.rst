@@ -9,6 +9,13 @@ Jmbo Banner
 .. contents:: Contents
     :depth: 5
 
-Content types
--------------
+Installation
+------------
+
+#. Install or add ``jmbo-banner`` to your Python path.
+
+#. Add ``banner`` to your ``INSTALLED_APPS`` setting.
+
+#. Run ``manage.py migrate banner``.
+
 
