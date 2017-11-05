@@ -18,4 +18,13 @@ Installation
 
 #. Run ``manage.py migrate banner``.
 
+Usage
+-----
+
+How does it work?
+-----------------
+
+Adding your own banner styles
+-----------------------------
+
 
