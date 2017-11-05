@@ -30,11 +30,12 @@ Content types
 
 * A banner can consist of several buttons, although usually only two are used.
 
-* A button has a `text` field which can be used to specify its label, and a `link` object which can be used to specify its click-through.
+* A button has a *text* field which can be used to specify its label, and a *link* object which can be used to specify its click-through.
 
 **Banner:**
 
-* A banner can be thought of as a container for promotional content. It can consist of buttons, images and promotional text
+* A banner can be thought of as a container for promotional content. It can consist of buttons, images and promotional text.
+Each banner also has a *style* which controls how its contents are rendered.
 
 
 How does it work?
