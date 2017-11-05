@@ -21,8 +21,19 @@ Installation
 Usage
 -----
 
+Content types
+-------------
+``jmbo-banner`` defines the following content types:
+Button:
+* A banner can consist of several buttons, although usually only two are used.
+* A button has a `text` field which can be used to specify its label, and a `link` object which can be used to specify its click-through.
+
+Banner:
+* A banner can be thought of as a container for promotional content.
+
 How does it work?
 -----------------
+``jmbo-banner`` allows users to create banners in the admin. ``jmbo-banner`` models
 
 Adding your own banner styles
 -----------------------------
