@@ -13,9 +13,6 @@ class Banner(ModelBase):
         Link, help_text=_("Link to which this banner should redirect."),
         blank=True, null=True
     )
-    background_image = models.OneToOneField(
-        Image, null=True, blank=True
-    )
     style = models.CharField(choices=[(klass.__name__, klass.__name__) for klass in BANNER_STYLE_CLASSES], max_length=128)
 
 
