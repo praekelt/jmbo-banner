@@ -16,14 +16,4 @@ class Migration(migrations.Migration):
             model_name='banner',
             name='background_image',
         ),
-        migrations.AlterField(
-            model_name='banner',
-            name='style',
-            field=models.CharField(choices=[(b'BaseStyle', b'BaseStyle')], max_length=128),
-        ),
-        migrations.AlterField(
-            model_name='button',
-            name='banner',
-            field=models.ManyToManyField(blank=True, null=True, related_name='buttons', through='banner.ButtonOrder', to='banner.Banner'),
-        ),
     ]
