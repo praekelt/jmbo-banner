@@ -2,8 +2,15 @@ sudo: false
 language: python
 cache: pip
 
+python:
+  - 2.7
+  - 3.5
+  - 3.6
+
 env:
   - TOXENV=django111-py27
+  - TOXENV=django111-py35
+  - TOXENV=django111-py36
 
 install:
   - pip install tox
