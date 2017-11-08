@@ -1,5 +1,6 @@
 from django import template
 from django.contrib.sites.models import Site
+from django.http import Http404
 from django.test import TestCase
 
 from banner.models import Banner
@@ -43,21 +44,23 @@ class TemplateTagTestCase(TestCase):
         result = t.render(context)
         self.failUnless("Test Banner" in result)
 
-    def test_unknown_object_renders_nothig(self):
-        context = template.Context({"banner": self.banner})
-        t = template.Template(
-            """
-            {% load banner_tags %}
-            {% render_banner "unknown-banner" %}
-            """
-        )
-        result = t.render(context)
-        self.failIf("Test Banner" in result)
+    def test_unknown_object_raises_404(self):
+        with self.assertRaisesMessage(
+            Http404,
+            "No Banner with slug 'unknown-banner' was found"
+        ):
+            t = template.Template(
+                """
+                {% load banner_tags %}
+                {% render_banner "unknown-banner" %}
+                """
+            )
+            t.render(template.Context({}))
 
     def test_raises_exception_if_banner_not_specified(self):
         with self.assertRaisesMessage(
             template.TemplateSyntaxError,
-            "render_banner tag requires at the slug or the banner object."
+            "Tag usage: '{% render_banner <slug or object> %} '"
         ):
             template.Template(
                 """
