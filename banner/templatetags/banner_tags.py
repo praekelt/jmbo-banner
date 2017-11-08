@@ -1,6 +1,7 @@
 import six
 
 from django import template
+from django.http import Http404
 
 from banner.models import Banner
 from banner.styles import BANNER_STYLES_MAP
@@ -14,7 +15,7 @@ def render_banner(parser, token):
 
     if len(tokens) < 2:
         raise template.TemplateSyntaxError(
-            "render_banner tag requires at the slug or the banner object."
+            "Tag usage: '{% render_banner <slug or object> %} '"
         )
 
     object_or_slug = tokens[1]
@@ -39,7 +40,11 @@ class BannerNode(template.Node):
             try:
                 obj = Banner.permitted.get(slug=object_or_slug)
             except Banner.DoesNotExist:
-                return ""
+                raise Http404(
+                    "No Banner with slug '{}' was found".format(
+                        object_or_slug
+                    )
+                )
         else:
             obj = object_or_slug
 
