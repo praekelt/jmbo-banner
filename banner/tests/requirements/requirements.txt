@@ -1,4 +1,3 @@
 django-contrib-comments==1.7.1
 psycopg2
 six==1.9.0
-django-ultracache==1.10.2
