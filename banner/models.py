@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from jmbo.models import Image, ModelBase
+from jmbo.models import ModelBase
 from link.models import Link
 
 from banner.styles import BANNER_STYLE_CLASSES
@@ -13,7 +13,13 @@ class Banner(ModelBase):
         Link, help_text=_("Link to which this banner should redirect."),
         blank=True, null=True
     )
-    style = models.CharField(choices=[(klass.__name__, klass.__name__) for klass in BANNER_STYLE_CLASSES], max_length=128)
+    style = models.CharField(
+        choices=[
+            (klass.__name__, klass.__name__)
+            for klass in BANNER_STYLE_CLASSES
+        ],
+        max_length=128
+    )
 
 
 class Button(models.Model):
@@ -25,7 +31,10 @@ class Button(models.Model):
     link = models.ForeignKey(
         Link, help_text=_("CTA link for this button"), null=True, blank=True
     )
-    banner = models.ManyToManyField(to=Banner, related_name="buttons", null=True, blank=True, through="ButtonOrder")
+    banner = models.ManyToManyField(
+        to=Banner, related_name="buttons",
+        null=True, blank=True, through="ButtonOrder"
+    )
 
 
 class ButtonOrder(models.Model):

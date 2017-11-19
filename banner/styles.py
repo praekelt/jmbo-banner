@@ -6,7 +6,6 @@ from django.utils.module_loading import import_module
 
 
 class BaseStyle(object):
-    image_path = "/admin/banner/images/unknown.png"
     template_name = "banner/inclusion_tags/banner_detail.html"
 
     def __init__(self, banner):

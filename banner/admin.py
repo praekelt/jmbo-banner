@@ -2,7 +2,6 @@ from django.contrib import admin
 
 from jmbo.admin import ImageInline, ModelBaseAdmin
 
-from banner.forms import BannerAdminForm
 from banner.models import Banner, Button, ButtonOrder
 
 
@@ -13,7 +12,6 @@ class ButtonInline(admin.TabularInline):
 
 
 class BannerAdmin(ModelBaseAdmin):
-    form = BannerAdminForm
     inlines = [ImageInline, ButtonInline]
 
 
