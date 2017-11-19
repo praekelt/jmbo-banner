@@ -1,7 +1,6 @@
-import six
-
 from django import template
 from django.http import Http404
+from django.utils import six
 
 from banner.models import Banner
 from banner.styles import BANNER_STYLES_MAP
