@@ -1,23 +1,21 @@
-from os.path import expanduser
-
 DEBUG = True
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'jmbo',
-        'USER': 'postgres',
-        'PASSWORD': '',
-        'HOST': '',
-        'PORT': '',
+    "default": {
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": "test",
+        "USER": "postgres",
+        "PASSWORD": "",
+        "HOST": "",
+        "PORT": "",
     }
 }
 
 INSTALLED_APPS = (
     'banner',
     'banner.tests',
-    'jmbo',
     'django_comments',
+    'jmbo',
     'layers',
     'link',
     'photologue',
@@ -71,9 +69,5 @@ USE_TZ = True
 SITE_ID = 1
 
 STATIC_URL = '/static/'
-
-# Disable celery
-CELERY_ALWAYS_EAGER = True
-BROKER_BACKEND = 'memory'
 
 SECRET_KEY = "SECRET_KEY"

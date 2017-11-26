@@ -19,7 +19,7 @@ class Banner(ModelBase):
             (klass.__name__, klass.__name__)
             for klass in BANNER_STYLE_CLASSES
         ],
-        max_length=128
+        max_length=128, default="BaseStyle"
     )
     headline = SimpleMDEField(null=True, blank=True, help_text=_("The banner's headline."))
     body = SimpleMDEField(null=True, blank=True, help_text=_("The banner's main text content."))
