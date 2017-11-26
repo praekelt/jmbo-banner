@@ -41,7 +41,14 @@ How does it work?
 -----------------
 ``jmbo-banner`` allows users to create banners in the admin. ``jmbo-banner`` models
 
+
 Adding your own banner styles
 -----------------------------
+
+It is sometimes necessary to more *styles* in which banners can be rendered. This can easily be achieved by adding a package, ``banner_config`` to one of your own
+apps and ensuring that you create your custom style in a ``styles.py`` file. An example structure would be as follows::
+    <your app>
+        __init__.py
+        styles.py
 
 
