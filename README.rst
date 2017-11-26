@@ -54,8 +54,8 @@ apps and ensuring that you create your custom style in a ``styles.py`` file. An 
 
 All custom styles should inherit from ``BaseStyle``. For most situations, overriding the ``template_name`` should suffice.
 
-..  code-block:: python
-    :caption: banner_config/styles.py
+.. code-block:: python
+   :caption: banner_config/styles.py
 
     from banner.styles import BaseStyle
 
