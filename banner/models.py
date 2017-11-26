@@ -3,6 +3,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from jmbo.models import ModelBase
 from link.models import Link
+from simplemde.fields import SimpleMDEField
 
 from banner.styles import BANNER_STYLE_CLASSES
 
@@ -20,6 +21,8 @@ class Banner(ModelBase):
         ],
         max_length=128
     )
+    headline = SimpleMDEField(null=True, blank=True, help_text=_("The banner's headline."))
+    body = SimpleMDEField(null=True, blank=True, help_text=_("The banner's main text content."))
 
 
 class Button(models.Model):
