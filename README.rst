@@ -35,7 +35,7 @@ Content types
 **Banner:**
 
 * A banner can be thought of as a container for promotional content. It can consist of buttons, images and promotional text.
-Each banner also has a *style* which controls how its contents are rendered.
+    Each banner also has a *style* which controls how its contents are rendered.
 
 
 How does it work?
