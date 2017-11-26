@@ -16,8 +16,8 @@ setup(
         # if in tests_require.
         'django>=1.11',
         'django-link',
+        'django-simplemde',
         'jmbo',
-        'six'
     ],
     tests_require=[
         'django-setuptest>=0.1.4',
