@@ -19,7 +19,7 @@ def render_banner(parser, token):
 
     object_or_slug = tokens[1]
     kwargs = {}
-    for kv in tokens[2:]:
+    for kv in tokens[2:]:  # pragma: nocoverage
         k, v = kv.split("=")
         kwargs[k] = v
 
