@@ -1,2 +1,7 @@
 {% extends 'base.html' %}
 
+{% block content %}}
+    {% for object in object_list %}
+        {% render_banner object %}
+    {% endfor %}
+{% endblock %}
