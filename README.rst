@@ -45,10 +45,24 @@ How does it work?
 Adding your own banner styles
 -----------------------------
 
-It is sometimes necessary to more *styles* in which banners can be rendered. This can easily be achieved by adding a package, ``banner_config`` to one of your own
+It is sometimes necessary to have more *styles* in which banners can be rendered. This can easily be achieved by adding a package, ``banner_config`` to one of your own
 apps and ensuring that you create your custom style in a ``styles.py`` file. An example structure would be as follows::
     <your app>
         __init__.py
         styles.py
 
+
+All custom styles should inherit from ``BaseStyle``. For most situations, overriding the ``template_name`` should suffice.
+
+..  code-block:: python
+    :caption: banner_config/styles.py
+
+    from banner.styles import BaseStyle
+
+
+    class CustomStyle(BaseStyle):
+        """
+        Custom banner style
+        """
+        template_name = "banner/custom_banner.html"
 
