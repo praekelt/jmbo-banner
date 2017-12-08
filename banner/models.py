@@ -39,6 +39,9 @@ class Button(models.Model):
         null=True, blank=True, through="ButtonOrder"
     )
 
+    def __unicode__(self):
+        return self.text
+
 
 class ButtonOrder(models.Model):
     banner = models.ForeignKey(Banner)
