@@ -4,6 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 from jmbo.models import ModelBase
 from link.models import Link
 from simplemde.fields import SimpleMDEField
+from sortedm2m.fields import SortedManyToManyField
 
 from banner.styles import BANNER_STYLE_CLASSES
 
@@ -34,19 +35,10 @@ class Button(models.Model):
     link = models.ForeignKey(
         Link, help_text=_("CTA link for this button"), null=True, blank=True
     )
-    banner = models.ManyToManyField(
+    banner = SortedManyToManyField(
         to=Banner, related_name="buttons",
-        null=True, blank=True, through="ButtonOrder"
+        null=True, blank=True
     )
 
     def __unicode__(self):
         return self.text
-
-
-class ButtonOrder(models.Model):
-    banner = models.ForeignKey(Banner)
-    button = models.ForeignKey(Button)
-    position = models.PositiveIntegerField(default=0)
-
-    class Meta(object):
-        ordering = ["position"]

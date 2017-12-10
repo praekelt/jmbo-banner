@@ -2,17 +2,11 @@ from django.contrib import admin
 
 from jmbo.admin import ImageInline, ModelBaseAdmin
 
-from banner.models import Banner, Button, ButtonOrder
-
-
-class ButtonInline(admin.TabularInline):
-    model = ButtonOrder
-    verbose_name = "Button"
-    verbose_name_plural = "Buttons"
+from banner.models import Banner, Button
 
 
 class BannerAdmin(ModelBaseAdmin):
-    inlines = [ImageInline, ButtonInline]
+    inlines = [ImageInline, ]
 
 
 admin.site.register(Banner, BannerAdmin)
