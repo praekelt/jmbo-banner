@@ -21,6 +21,10 @@ Installation
 Usage
 -----
 
+``jmbo-banner`` allows users to create and edit banners in the admin. Each banner can optionally have a byline,
+a description block, images and CTA buttons. The way in which these components are laid out in each banner is defined
+in a banner style.
+
 Content types
 -------------
 
@@ -37,10 +41,11 @@ Content types
 * A banner can be thought of as a container for promotional content. It can consist of buttons, images and promotional text. Each banner also has a *style* which controls how its contents are rendered.
 
 
-How does it work?
------------------
-``jmbo-banner`` allows users to create banners in the admin. ``jmbo-banner`` models
+Banner styles
+-------------
 
+``jmbo-banner`` allows you to control how each banner will be rendered. The different ways in which a banner can be rendered can be found in a predefined list of styles.
+A style controls how the different components (buttons, images, description) are rendered through a *template partial*.
 
 Adding your own banner styles
 -----------------------------
@@ -55,8 +60,8 @@ apps and ensuring that you create your custom style in a ``styles.py`` file. An 
             styles.py
 
 
-All custom styles should inherit from ``BaseStyle``. For most situations, overriding the ``template_name`` should suffice.
-
+All custom styles **should** inherit from ``BaseStyle``. For most situations, overriding the ``template_name`` should suffice.
+It is important to bear in mind a style's template is meant to be used as a partial containing only the banner content.
 
 .. code-block:: python
 
@@ -69,3 +74,19 @@ All custom styles should inherit from ``BaseStyle``. For most situations, overri
         """
         template_name = "banner/custom_banner.html"
 
+The ``CustomStyle`` should then be available for selection in the list of styles.
+
+
+Getting banners to render on a page
+-----------------------------------
+
+Banners are typically rendered as part of a page. This can be achieved by using the ``render_banner`` template tag as shown in below.
+
+.. code-block:: html
+
+    {% extends "base.html" %}
+    {% load banner_tags %}
+
+    {% block content %}
+        {% render_banner object %}
+    {% endblock %}
