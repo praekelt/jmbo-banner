@@ -80,7 +80,8 @@ The ``CustomStyle`` should then be available for selection in the list of styles
 Getting banners to render on a page
 -----------------------------------
 
-Banners are typically rendered as part of a page. This can be achieved by using the ``render_banner`` template tag as shown in below.
+Banners are typically rendered as part of a page. This can be achieved by using the ``render_banner`` template tag as shown below. The template tag accepts either a
+banner object or it's slug.
 
 .. code-block:: html
 
@@ -88,5 +89,5 @@ Banners are typically rendered as part of a page. This can be achieved by using 
     {% load banner_tags %}
 
     {% block content %}
-        {% render_banner object %}
+        {% render_banner <object_or_slug> %}
     {% endblock %}
