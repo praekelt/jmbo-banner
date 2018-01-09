@@ -91,3 +91,4 @@ banner object or it's slug.
     {% block content %}
         {% render_banner <object_or_slug> %}
     {% endblock %}
+
