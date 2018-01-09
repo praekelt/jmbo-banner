@@ -7,12 +7,6 @@ matrix:
     - python: 2.7
       env:
         - TOXENV=django111-py27
-    - python: 3.5
-      env:
-       - TOXENV=django111-py35
-    - python: 3.6
-      env:
-       - TOXENV=django111-py36
 
 install:
   - pip install tox
