@@ -1,43 +1,50 @@
 from django import template
+from django.http import Http404
+from django.utils import six
+
+from banner.models import Banner
+from banner.styles import BANNER_STYLES_MAP
 
 register = template.Library()
 
 
 @register.tag
-def get_actual_banner(parser, token):
-    """Get actual banner for a BannerProxy object.
+def render_banner(parser, token):
+    tokens = token.split_contents()
 
-    Syntax::
-
-        {% get_actual_banner for [object] as [varname] %}
-    """
-    tokens = token.contents.split()
-    if len(tokens) != 5:
+    if len(tokens) < 2:
         raise template.TemplateSyntaxError(
-            "%r tag requires 4 arguments" % tokens[0]
+            "Tag usage: '{% render_banner <slug or object> %} '"
         )
 
-    if tokens[1] != 'for':
-        raise template.TemplateSyntaxError(
-            "First argument in %r tag must be 'for'" % tokens[0]
-        )
+    object_or_slug = tokens[1]
+    kwargs = {}
+    for kv in tokens[2:]:  # pragma: nocoverage
+        k, v = kv.split("=")
+        kwargs[k] = v
 
-    if tokens[3] != 'as':
-        raise template.TemplateSyntaxError(
-            "Third argument in %r tag must be 'as'" % tokens[0]
-        )
-
-    return ActualBannerNode(obj=tokens[2], as_var=tokens[4])
+    return BannerNode(object_or_slug, **kwargs)
 
 
-class ActualBannerNode(template.Node):
+class BannerNode(template.Node):
 
-    def __init__(self, obj, as_var):
-        self.obj = template.Variable(obj)
-        self.as_var = template.Variable(as_var)
+    def __init__(self, object_or_slug, **kwargs):
+        self.object_or_slug = template.Variable(object_or_slug)
+        self.kwargs = kwargs
 
     def render(self, context):
-        obj = self.obj.resolve(context)
-        as_var = self.as_var.resolve(context)
-        context[as_var] = obj.get_actual_banner(context['request'])
-        return ''
+        object_or_slug = self.object_or_slug.resolve(context)
+
+        if isinstance(object_or_slug, six.string_types):
+            try:
+                obj = Banner.permitted.get(slug=object_or_slug)
+            except Banner.DoesNotExist:
+                raise Http404(
+                    "No Banner with slug '{}' was found".format(
+                        object_or_slug
+                    )
+                )
+        else:
+            obj = object_or_slug
+
+        return BANNER_STYLES_MAP[obj.style](obj).render(context)

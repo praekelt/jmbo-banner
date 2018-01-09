@@ -1,6 +1,12 @@
 Changelog
 =========
 
+1.0
+---
+#. Django 1.11 compatibility.
+#. Recreated `Banner` model with headline, body, and button components.
+#. Removed `django-dfp` dependency.
+
 0.6
 ---
 #. Django 1.6 compatibility.

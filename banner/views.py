@@ -1,9 +1,13 @@
-from django.http import HttpResponseRedirect
+from jmbo.views import ObjectDetail, ObjectList
 
-from banner.tasks import dfp_click_proxy_task
+from banner.models import Banner
 
 
-def dfp_click_proxy(request):
-    """Fire off an async request and redirect to image banner target"""
-    dfp_click_proxy_task.delay(request)
-    return HttpResponseRedirect(request.GET['url'])
+class BannerDetailView(ObjectDetail):
+    model = Banner
+    template_name = "banner/banner_detail.html"
+
+
+class BannerListView(ObjectList):
+    model = Banner
+    template_name = "banner/banner_list.html"

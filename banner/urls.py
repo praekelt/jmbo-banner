@@ -1,15 +1,17 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
+
+from banner.views import BannerDetailView, BannerListView
 
 
-urlpatterns = patterns(
-    '',
-
-    # Click proxy. No need for pretty urls.
+urlpatterns = [
     url(
-        r'^dfp-click-proxy/$',
-        'banner.views.dfp_click_proxy',
-        {},
-        name='banner-dfp-click-proxy'
+        r"^detail/(?P<slug>[\w-]+)/$",
+        BannerDetailView.as_view(),
+        name="banner-detail"
     ),
-
-)
+    url(
+        r"^$",
+        BannerListView.as_view(),
+        name="banner-list"
+    ),
+]
