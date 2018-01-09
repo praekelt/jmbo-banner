@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='jmbo-banner',
-    version='0.6',
+    version='1.0',
     description='Jmbo banner app.',
     long_description=open('README.rst', 'r').read() + open('AUTHORS.rst', 'r').read() + open('CHANGELOG.rst', 'r').read(),
     author='Praekelt Consulting',
@@ -20,7 +20,7 @@ setup(
     classifiers=[
         "Programming Language :: Python",
         "License :: OSI Approved :: BSD License",
-        "Development Status :: 4 - Beta",
+        "Development Status :: 5 - Production/Stable",
         "Operating System :: OS Independent",
         "Framework :: Django",
         "Intended Audience :: Developers",
