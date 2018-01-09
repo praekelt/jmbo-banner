@@ -1,9 +1,8 @@
-from django.conf.urls import patterns, include
+from django.conf.urls import include, url
 
 
-urlpatterns = patterns(
-    '',
-    (r'^jmbo/', include('jmbo.urls')),
-    (r'^comments/', include('django.contrib.comments.urls')),
-    (r'^banner/', include('banner.urls')),
-)
+urlpatterns = [
+    url(r"^jmbo/", include("jmbo.urls")),
+    url(r"^comments/", include("django_comments.urls")),
+    url(r'^banner/', include("banner.urls", namespace="banner")),
+]
