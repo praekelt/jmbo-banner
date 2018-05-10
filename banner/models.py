@@ -13,7 +13,8 @@ class Banner(ModelBase):
     """Base class for all banners"""
     link = models.ForeignKey(
         Link, help_text=_("Link to which this banner should redirect."),
-        blank=True, null=True
+        blank=True, null=True,
+        on_delete=models.CASCADE
     )
     style = models.CharField(
         choices=[
@@ -33,7 +34,8 @@ class Button(models.Model):
         help_text=_("The text to be displayed as the button label")
     )
     link = models.ForeignKey(
-        Link, help_text=_("CTA link for this button"), null=True, blank=True
+        Link, help_text=_("CTA link for this button"), null=True, blank=True,
+        on_delete=models.CASCADE
     )
     banner = SortedManyToManyField(
         to=Banner, related_name="buttons",
@@ -42,3 +44,5 @@ class Button(models.Model):
 
     def __unicode__(self):
         return self.text
+
+    __str__ = __unicode__

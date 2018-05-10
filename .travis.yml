@@ -1,4 +1,3 @@
-sudo: false
 language: python
 cache: pip
 
@@ -6,7 +5,10 @@ matrix:
   include:
     - python: 2.7
       env:
-        - TOXENV=django111-py27
+        - TOXENV=django111
+    - python: 3.5
+      env:
+        - TOXENV=django20
 
 install:
   - pip install tox

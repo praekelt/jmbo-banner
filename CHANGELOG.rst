@@ -1,6 +1,10 @@
 Changelog
 =========
 
+next
+----
+#. Django 2 and Python 3.5 compatibility.
+
 1.0
 ---
 #. Django 1.11 compatibility.

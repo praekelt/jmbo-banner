@@ -18,8 +18,9 @@ class TemplateTagTestCase(TestCase):
             state="published",
             style=BANNER_STYLE_CLASSES[0].__name__
         )
-        cls.banner.sites = list(Site.objects.all())
         cls.banner.publish()
+        cls.banner.sites .set(Site.objects.all())
+        cls.banner.save()
 
     def test_renders_if_object_is_passed(self):
         # renders if object is passed

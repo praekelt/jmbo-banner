@@ -11,7 +11,6 @@ setup(
     url='http://github.com/praekelt/jmbo-banner',
     packages=find_packages(),
     install_requires=[
-        'django>=1.11,<2.0',
         'django-link',
         'django-simplemde',
         'jmbo',

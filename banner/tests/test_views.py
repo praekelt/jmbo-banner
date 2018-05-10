@@ -12,8 +12,9 @@ class DetailViewTestCase(TestCase):
     def setUpTestData(cls):
         super(DetailViewTestCase, cls).setUpTestData()
         cls.banner = Banner.objects.create(title="Test Banner", style="BaseStyle")
-        cls.banner.sites = Site.objects.all()
         cls.banner.publish()
+        cls.banner.sites.set(Site.objects.all())
+        cls.banner.save()
 
     def test_view_renders(self):
         response = self.client.get(
